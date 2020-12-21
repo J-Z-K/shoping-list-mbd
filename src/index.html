@@ -6,8 +6,46 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Dupsgonaadd</h1>
-    <img src="./images/download.png" />
-    <img src="./images/download copy.png" />
+    <form action="" id="form">
+      <div class="inputGroup">
+        <label for="item">Wprowadź produkt:</label>
+        <input
+          type="text"
+          name="item"
+          id="item"
+          placeholder="produkt"
+          required
+          value="marchew"
+        />
+      </div>
+      <div class="inputGroup">
+        <label for="value">Wprowadź ilość:</label>
+        <input
+          type="value"
+          name="value"
+          id="value"
+          placeholder="wartość"
+          required
+          value="2"
+        />
+      </div>
+      <div class="inputGroup">
+        <input type="radio" name="unit" id="sztuk" value="0" checked required />
+        <label for="sztuk">sztuk</label>
+        <input type="radio" name="unit" id="kg" value="1" required />
+        <label for="kg">kg</label>
+      </div>
+      <div class="select-dropdown">
+        <select class="minimal" name="category">
+          <option value="0">warzywa</option>
+          <option value="1">owoce</option>
+          <option value="1">nabiał</option>
+          <option value="1">pieczywo</option>
+          <option value="1">artykuły higieniczne</option>
+        </select>
+      </div>
+      <button type="submit">Dodaj</button>
+    </form>
+    <ul id="list"></ul>
   </body>
 </html>
