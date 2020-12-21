@@ -36,16 +36,23 @@
         <label for="kg">kg</label>
       </div>
       <div class="select-dropdown">
-        <select class="minimal" name="category">
-          <option value="0">warzywa</option>
-          <option value="1">owoce</option>
-          <option value="1">nabiał</option>
-          <option value="1">pieczywo</option>
-          <option value="1">artykuły higieniczne</option>
+        <select class="minimal" name="category" id="category">
+          <option value="warzywa">warzywa</option>
+          <option value="owoce">owoce</option>
+          <option value="ziemniaki">nabiał</option>
+          <option value="pieczywo">pieczywo</option>
+          <option value="artykuły higieniczne">artykuły higieniczne</option>
         </select>
       </div>
       <button type="submit">Dodaj</button>
     </form>
-    <ul id="list"></ul>
+    <table id="list">
+      <tr>
+        <th>Nazwa</th>
+        <th>Ilość</th>
+        <th>Szt/Kg</th>
+        <th></th>
+      </tr>
+    </table>
   </body>
 </html>

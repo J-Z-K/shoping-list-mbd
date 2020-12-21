@@ -10,6 +10,8 @@ html {
 body {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin-top: 100px;
 }
 
@@ -43,7 +45,7 @@ body {
   box-shadow: none;
 }
 .select-dropdown:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   right: 8px;
