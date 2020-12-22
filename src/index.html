@@ -6,7 +6,7 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="" id="form">
+    <form action="" id="formMain">
       <div class="inputGroup">
         <label for="item">Wprowadź produkt:</label>
         <input
@@ -36,23 +36,39 @@
         <label for="kg">kg</label>
       </div>
       <div class="select-dropdown">
-        <select class="minimal" name="category" id="category">
-          <option value="warzywa">warzywa</option>
+        <select class="minimal" name="categories" id="categories">
+          <!-- <option value="warzywa">warzywa</option>
           <option value="owoce">owoce</option>
           <option value="ziemniaki">nabiał</option>
           <option value="pieczywo">pieczywo</option>
-          <option value="artykuły higieniczne">artykuły higieniczne</option>
+          <option value="artykuły higieniczne">artykuły higieniczne</option> -->
         </select>
       </div>
       <button type="submit">Dodaj</button>
     </form>
+
     <table id="list">
       <tr>
         <th>Nazwa</th>
         <th>Ilość</th>
-        <th>Szt/Kg</th>
+        <th>jednostka</th>
         <th></th>
       </tr>
     </table>
+
+    <form action="" id="formcategories">
+      <div class="inputGroup">
+        <label for="item">Wprowadź kategorie:</label>
+        <input
+          type="text"
+          name="category"
+          id="category"
+          placeholder="kategoira"
+          required
+          value="wędliny"
+        />
+        <button type="submit">Dodaj</button>
+      </div>
+    </form>
   </body>
 </html>
