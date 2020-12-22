@@ -1,4 +1,8 @@
 import "./styles/main.scss";
+import "@fortawesome/fontawesome-free/js/fontawesome";
+import "@fortawesome/fontawesome-free/js/solid";
+// import "@fortawesome/fontawesome-free/js/regular";
+// import "@fortawesome/fontawesome-free/js/brands";
 
 let itemsList = JSON.parse(localStorage.getItem("items"))
   ? JSON.parse(localStorage.getItem("items"))
@@ -6,10 +10,11 @@ let itemsList = JSON.parse(localStorage.getItem("items"))
 
 let categoriesList = JSON.parse(localStorage.getItem("categories"))
   ? JSON.parse(localStorage.getItem("categories"))
-  : [];
+  : ["warzywa", "owoce", "pieczywo"];
 
 window.onload = function () {
   // generateOptions(categoriesList);
+  setCalc();
   const categories = document.querySelector("#categories");
   const list = document.querySelector("#list");
 
@@ -28,11 +33,33 @@ window.onload = function () {
       ),
       category: document.querySelector("#categories").value,
     };
-
-    itemsList.push(entry);
-    localStorage.setItem("items", JSON.stringify(itemsList));
-    console.log(entry);
-    generateTr(entry);
+    if (
+      itemsList.some(
+        (e) =>
+          e.item === entry.item &&
+          e.unit === entry.unit &&
+          e.category === entry.category
+      )
+    ) {
+      let index = itemsList.findIndex(
+        (e) =>
+          e.item === entry.item &&
+          e.unit === entry.unit &&
+          e.category === entry.category
+      );
+      itemsList[index].value += entry.value;
+      document.querySelector(
+        `#id${itemsList[index].id}`
+      ).children[1].innerText = `${itemsList[index].value}${
+        itemsList[index].unit == 1 ? " kg" : "x"
+      }`;
+      localStorage.setItem("items", JSON.stringify(itemsList));
+    } else {
+      itemsList.push(entry);
+      localStorage.setItem("items", JSON.stringify(itemsList));
+      generateTr(entry);
+    }
+    setCalc();
     return false;
   };
 
@@ -50,19 +77,18 @@ window.onload = function () {
 const generateTr = ({ id, item, value, unit, category }) => {
   const tr = document.createElement("tr");
   tr.appendChild(generateTd(item));
-  tr.appendChild(generateTd(value));
-  tr.appendChild(generateTd(unit == 1 ? "kg" : "szt"));
+  tr.appendChild(generateTd(`${value}${unit == 1 ? " kg" : "x"}`));
+  tr.appendChild(generateTd());
+  tr.id = `id${id}`;
+  // tr.
   const td = document.createElement("td");
-  td.textContent = "x";
-  td.id = id;
+  td.innerHTML = "<i class='fas fa-trash-alt'></i>";
   td.className = "remove";
   td.onclick = remove;
   tr.appendChild(td);
-  // list.appendChild(tr);
   let cat = document.querySelector(`#${category}`).parentNode;
   console.log(`#${category}`);
   insertAfter(tr, cat);
-  // return tr;
 };
 
 const generateTd = (text) => {
@@ -87,7 +113,7 @@ const generateOption = (text) => {
 };
 
 const remove = (event) => {
-  const id = event.currentTarget.id;
+  const id = event.currentTarget.parentNode.id;
   event.currentTarget.parentNode.remove();
   itemsList = itemsList.filter((item) => item.id != id);
   localStorage.setItem("items", JSON.stringify(itemsList));
@@ -95,4 +121,23 @@ const remove = (event) => {
 
 const insertAfter = (newNode, referenceNode) => {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+};
+
+const setCalc = () => {
+  if (itemsList.length === 0) return 0;
+
+  document.querySelector("#all").innerText = itemsList.length;
+  itemsList
+    .filter(({ unit }) => unit === 0)
+    .reduce((a, b) => {
+      return { value: a.value + b.value };
+    });
+  document.querySelector("#pices").innerText = itemsList
+    .filter(({ unit }) => unit === 0)
+    .reduce((a, b) => ({ value: a.value + b.value })).value;
+
+  document.querySelector("#weight").innerText =
+    itemsList
+      .filter(({ unit }) => unit === 1)
+      .reduce((a, b) => ({ value: a.value + b.value })).value + " kg";
 };

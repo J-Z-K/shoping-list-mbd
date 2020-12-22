@@ -6,69 +6,81 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="" id="formMain">
-      <div class="inputGroup">
-        <label for="item">Wprowadź produkt:</label>
-        <input
-          type="text"
-          name="item"
-          id="item"
-          placeholder="produkt"
-          required
-          value="marchew"
-        />
-      </div>
-      <div class="inputGroup">
-        <label for="value">Wprowadź ilość:</label>
-        <input
-          type="value"
-          name="value"
-          id="value"
-          placeholder="wartość"
-          required
-          value="2"
-        />
-      </div>
-      <div class="inputGroup">
-        <input type="radio" name="unit" id="sztuk" value="0" checked required />
-        <label for="sztuk">sztuk</label>
-        <input type="radio" name="unit" id="kg" value="1" required />
-        <label for="kg">kg</label>
-      </div>
-      <div class="select-dropdown">
-        <select class="minimal" name="categories" id="categories">
-          <!-- <option value="warzywa">warzywa</option>
-          <option value="owoce">owoce</option>
-          <option value="ziemniaki">nabiał</option>
-          <option value="pieczywo">pieczywo</option>
-          <option value="artykuły higieniczne">artykuły higieniczne</option> -->
-        </select>
-      </div>
-      <button type="submit">Dodaj</button>
-    </form>
+    <div class="list">
+      <h1>Lista Zakupów</h1>
 
-    <table id="list">
-      <tr>
-        <th>Nazwa</th>
-        <th>Ilość</th>
-        <th>jednostka</th>
-        <th></th>
-      </tr>
-    </table>
-
-    <form action="" id="formcategories">
-      <div class="inputGroup">
-        <label for="item">Wprowadź kategorie:</label>
-        <input
-          type="text"
-          name="category"
-          id="category"
-          placeholder="kategoira"
-          required
-          value="wędliny"
-        />
+      <form autocomplete="off" action="" id="formMain">
+        <div class="inputGroup">
+          <label for="item">Wprowadź produkt</label>
+          <input
+            type="text"
+            name="item"
+            id="item"
+            placeholder="produkt"
+            required
+          />
+        </div>
+        <div class="inputGroup">
+          <label for="value">Wprowadź ilość</label>
+          <input
+            type="number"
+            name="value"
+            id="value"
+            placeholder="wartość"
+            required
+            min="1"
+          />
+        </div>
+        <div class="radioGroup">
+          <input
+            type="radio"
+            name="unit"
+            id="sztuk"
+            value="0"
+            checked
+            required
+          />
+          <label for="sztuk">sztuk</label>
+          <input type="radio" name="unit" id="kg" value="1" required />
+          <label for="kg">kg</label>
+        </div>
+        <div class="select-dropdown select">
+          <select class="minimal" name="categories" id="categories" required>
+            <option value="" disabled selected>Wybierz kategorie</option>
+          </select>
+        </div>
         <button type="submit">Dodaj</button>
+      </form>
+
+      <h2>lista</h2>
+      <div class="paper">
+        <table id="list">
+          <tr>
+            <!-- <th>Nazwa</th>
+          <th>Ilość</th>
+          <th>jednostka</th>
+          <th></th> -->
+          </tr>
+        </table>
+        <hr />
+        <h4>kalkulacje:</h4>
+        <p>łącznie: <span id="all"></span></p>
+        <p>sztuk: <span id="pices"></span></p>
+        <p>waga: <span id="weight"></span></p>
       </div>
-    </form>
+      <form autocomplete="off" action="" id="formcategories">
+        <div class="inputGroup">
+          <label for="item">Wprowadź kategorie</label>
+          <input
+            type="text"
+            name="category"
+            id="category"
+            placeholder="kategoria"
+            required
+          />
+          <button type="submit">Dodaj</button>
+        </div>
+      </form>
+    </div>
   </body>
 </html>
