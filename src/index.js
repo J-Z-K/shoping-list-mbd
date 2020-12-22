@@ -16,9 +16,13 @@ window.onload = function () {
   const categories = document.querySelector("#categories");
   const list = document.querySelector("#list");
 
-  categoriesList.forEach((element) => generateOption(element));
+  categoriesList.forEach((element) =>
+    generateOption(element, categories, list)
+  );
+
   itemsList.forEach((element) => generateTr(element));
   const formMain = document.querySelector("#formMain");
+
   formMain.onsubmit = (e) => {
     e.preventDefault();
     let entry = {
@@ -66,7 +70,7 @@ window.onload = function () {
     const category = document.querySelector("#category").value;
     categoriesList.push(category);
     localStorage.setItem("categories", JSON.stringify(categoriesList));
-    generateOption(category);
+    generateOption(category, categories, list);
     return false;
   };
 };
@@ -91,7 +95,7 @@ const generateTd = (text) => {
   return td;
 };
 
-const generateOption = (text) => {
+const generateOption = (text, categories, list) => {
   const option = document.createElement("option");
   option.value = text;
   option.innerText = text;
