@@ -1,8 +1,6 @@
 import "./styles/main.scss";
 import "@fortawesome/fontawesome-free/js/fontawesome";
 import "@fortawesome/fontawesome-free/js/solid";
-// import "@fortawesome/fontawesome-free/js/regular";
-// import "@fortawesome/fontawesome-free/js/brands";
 
 let itemsList = JSON.parse(localStorage.getItem("items"))
   ? JSON.parse(localStorage.getItem("items"))
@@ -13,14 +11,13 @@ let categoriesList = JSON.parse(localStorage.getItem("categories"))
   : ["warzywa", "owoce", "pieczywo"];
 
 window.onload = function () {
-  // generateOptions(categoriesList);
   setCalc();
+
   const categories = document.querySelector("#categories");
   const list = document.querySelector("#list");
 
   categoriesList.forEach((element) => generateOption(element));
   itemsList.forEach((element) => generateTr(element));
-  console.log(itemsList);
   const formMain = document.querySelector("#formMain");
   formMain.onsubmit = (e) => {
     e.preventDefault();
@@ -78,16 +75,13 @@ const generateTr = ({ id, item, value, unit, category }) => {
   const tr = document.createElement("tr");
   tr.appendChild(generateTd(item));
   tr.appendChild(generateTd(`${value}${unit == 1 ? " kg" : "x"}`));
-  tr.appendChild(generateTd());
   tr.id = `id${id}`;
-  // tr.
   const td = document.createElement("td");
   td.innerHTML = "<i class='fas fa-trash-alt'></i>";
   td.className = "remove";
   td.onclick = remove;
   tr.appendChild(td);
   let cat = document.querySelector(`#${category}`).parentNode;
-  console.log(`#${category}`);
   insertAfter(tr, cat);
 };
 
